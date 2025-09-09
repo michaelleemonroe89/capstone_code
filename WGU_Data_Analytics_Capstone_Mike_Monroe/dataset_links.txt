@@ -1,0 +1,8 @@
+https://www.redfin.com/news/data-center/ 
+    Metro_median_sale_price_now_uc_sfrcondo_month.csv
+
+https://fred.stlouisfed.org/series/MORTGAGE30US
+    MORTGAGE30US.csv
+
+https://fredaccount.stlouisfed.org/
+    State median income
