@@ -1,0 +1,16 @@
+name: cap
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - jupyter
+  # Optional: Add any additional useful packages
+  - ipykernel
+  - notebook
+  - seaborn
+  - pip

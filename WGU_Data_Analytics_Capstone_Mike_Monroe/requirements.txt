@@ -1,4 +1,0 @@
-conda
-numpy
-pandas
-jupyter
