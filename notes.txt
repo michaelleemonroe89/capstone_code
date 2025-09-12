@@ -1,3 +1,0 @@
-conda activate cap
-python -m pip install ipykernel
-python -m ipykernel install --user --name=cap
