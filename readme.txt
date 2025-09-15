@@ -1,0 +1,190 @@
+# Housing Market and Median Income
+
+Michael Lee Monroe  
+Western Governors University
+
+---
+
+## Table of Contents
+
+- [A. Project Highlights](#a-project-highlights)
+    - Research Question
+    - Scope
+    - Overview of Solution
+- [B. Project Execution](#b-project-execution)
+    - Project Plan Variance
+    - Project Planning Methodology
+    - Timeline and Milestones
+- [C. Data Collection Process](#c-data-collection-process)
+    - Data Selection and Collection Variance
+    - Obstacles and Solutions
+    - Data Governance Issues
+- [C.1 Advantages and Limitations of Data Set](#c1-advantages-and-limitations-of-data-set)
+    - Advantages
+    - Limitations
+- [D. Data Extraction and Preparation](#d-data-extraction-and-preparation)
+- [E. Data Analysis Process](#e-data-analysis-process)
+    - Data Analysis Methods
+    - Advantages and Limitations of Tools and Techniques
+    - Application of Analytical Methods
+- [F. Data Analysis Results](#f-data-analysis-results)
+    - Statistical Significance
+    - Practical Significance
+    - Overall Success
+- [G. Conclusion](#g-conclusion)
+    - Summary of Conclusions
+    - Effective Storytelling
+    - Recommended Courses of Action
+- [H. Panopto Presentation](#h-panopto-presentation)
+- [References](#references)
+- [Appendixes](#appendixes)
+    - Appendix A
+    - Appendix B
+    - Appendix C
+    - Appendix D
+    - Appendix E
+
+---
+
+## A. Project Highlights
+
+**Research Question:**  
+How has housing affordability changed in each US state from 2008 to 2023 when combining three core drivers: median sale price, 30-year fixed mortgage rate, and median household income into a single monthly principal and interest payment burden percentage?
+
+**Scope:**  
+The project covers all 50 US states from 2008 to 2023, creating an integrated dataset that calculates monthly principal and interest payment as a percent of state median household income. This allows for a reproducible state-by-state benchmark of affordability trends, focusing on changes in payment burden over time and highlighting states where cost pressure increased the most.
+
+**Overview of Solution:**  
+Publicly available datasets from Redfin (home prices), FRED (mortgage rates), and the Census/FRED (state median income) were used. Data was cleaned and transformed using Python in Jupyter Notebook, with Python and Tableau for visualization. The process involved merging datasets, calculating monthly payments using the standard mortgage formula, and quantifying affordability using a percent-of-income metric.
+
+---
+
+## B. Project Execution
+
+**Project Plan Variance:**  
+Execution mostly matched the Task 2 plan. Data sources and structure were as expected, but income CSVs needed more cleaning than anticipated because of inconsistent headers and missing values. This was solved by writing custom Python scripts for column parsing and join validation. One state-year price value was missing and excluded from the final calculations. No major changes to methodology or scope were needed.
+
+**Project Planning Methodology:**  
+The iterative CRISP-DM process was followed: business understanding, data acquisition, transformation, validation, and deployment. Frequent checkpoints ensured quality and allowed for small adjustments as issues were found in the raw files.
+
+**Timeline and Milestones:**  
+Milestones from Task 2, such as data acquisition, transformation, validation, and report/visualization drafting, were all met on time overall. A brief delay occurred due to technical difficulties with my computer during the income data integration phase, but the timeline otherwise flowed smoothly. Final deliverables, including the dataset, dashboards, and report, were submitted as scheduled.
+
+---
+
+## C. Data Collection Process
+
+**Data Selection and Collection Variance:**  
+Data was sourced as planned from Redfin, FRED, and Census/FRED. Some state income files had missing years and inconsistent column names, requiring extra parsing and harmonization. Verification steps ensured all states and years were included.
+
+**Obstacles and Solutions:**  
+Income series from FRED/Census had nonstandard column names and missing years. Python scripts and manual review were used to reformat and merge. A single missing price record was dropped from the analysis. Date formats and state abbreviations were standardized across sources to allow successful merging.
+
+**Data Governance Issues:**  
+No human subject or proprietary data. All sources are public and cited. File integrity checks and documentation were maintained throughout.
+
+---
+
+## C.1 Advantages and Limitations of Data Set
+
+**Advantages:**  
+Nationwide coverage and annual granularity from 2008 to 2023. Public, reputable data sources enable transparency and replication. Integrated approach using price, rate, and income provides a broader view of affordability compared to single-factor studies.
+
+**Limitations:**  
+Mortgage rates in this analysis use national averages, not state-level rates, because more detailed public data is not available. Median income values are annual and do not capture variation within states or across different demographic groups. The analysis focuses only on principal and interest payments, so it does not include costs such as property taxes, homeowner insurance, or other expenses related to home ownership. There is also one state-year entry with missing home sale price data.
+
+---
+
+## D. Data Extraction and Preparation
+
+All data was extracted as CSV and loaded into pandas dataframes. Redfin metro price data was reshaped from wide monthly format to long annual state format using median aggregation. Mortgage rates collapsed from weekly to annual median. Income series were batch-downloaded, renamed by state, and merged. Key derived fields were calculated including monthly payment using the amortization formula, monthly income, and burden percent. Data was validated for nulls and joined on state-year. Final outputs were exported as CSV for Tableau.
+
+---
+
+## E. Data Analysis Process
+
+**Data Analysis Methods:**  
+Descriptive time trend analysis: calculated annual principal and interest burden percent by state. Point change analysis: compared burden percent between 2008 and 2023 for each state. Threshold classification: counted states at or above 30 percent burden each year. Comparative analysis: visualized price growth versus burden change. All transformations were deterministic and fully documented in the notebook.
+
+**Advantages and Limitations of Tools and Techniques:**  
+Python and pandas are powerful for data cleaning, reshaping, and calculation; scripts are easy to reproduce. Jupyter Notebook enables step-by-step documentation and code/data review. Tableau is useful for interactive dashboards and clear visualizations but is limited to processed data. Tableau cannot handle raw data cleaning, so all processing must occur in Python.
+
+**Application of Analytical Methods:**  
+- Load, clean, and reshape all raw data.
+- Aggregate monthly home prices to annual state medians.
+- Collapse weekly mortgage rates to annual median.
+- Merge state income series on year and state abbreviation.
+- Calculate monthly payment using standard 30-year amortization formula.
+- Derive principal and interest burden percent as monthly payment divided by monthly median income times 100.
+- Run point change and threshold analyses.
+- Export all results for dashboarding and reporting.
+
+---
+
+## F. Data Analysis Results
+
+**Statistical Significance:**  
+No inferential statistical tests were used since the dataset covers all US states. Results are interpreted as point changes and counts. For example, California's burden increased from 25 percent to 47 percent (plus 22 points), and the number of states above 30 percent burden rose from 1 in 2008 to 21 in 2023. These results are plainly significant in magnitude and scope.
+
+**Practical Significance:**  
+The rise in payment burden has a clear impact on household finances. In California, for example, the typical monthly payment for a median-priced home in 2023 made up almost half of the state’s median income, while in 2008 it was only about a quarter. Many states have seen increases of ten percentage points or more in the share of income needed for mortgage payments. This means families spend much larger portions of their monthly earnings on housing, leaving less for other basic needs and savings.
+
+**Overall Success:**  
+The project met all Task 2 objectives: reproducible workflow, clear integrated dataset, comprehensive dashboards, and interpretable results. Stakeholders can benchmark affordability over time, compare states, and understand the drivers of recent stress. The approach is transparent, reproducible, and easily updated for future years.
+
+---
+
+## G. Conclusion
+
+**Summary of Conclusions:**  
+Housing affordability has worsened in most states since 2008. States with the fastest home price appreciation saw the largest decline in affordability. Median incomes have not kept pace with home price growth, especially when mortgage rates are considered.
+
+**Effective Storytelling:**  
+This analysis uses visualizations created with Tableau and Python to show changes in housing affordability over time. Tableau provides interactive maps and line charts that let users select a year and compare data like median income, home prices, monthly payments, and the percentage of income spent on mortgages for each state. These tools help people quickly see which states have faced rising housing costs and when those increases happened.
+
+Python graphs add more detail by showing annual trends in selected states and tracking year-over-year changes for individual states. Bar charts show the number of states above the thirty percent income threshold for mortgage payments each year. Scatter plots make it possible to compare increases in home prices with changes in payment burden. Another bar chart organizes states by how much their payment burdens have increased over the study period.
+
+Together, these visualizations clarify patterns in declining housing affordability and help viewers see differences between states more easily.
+
+**Recommended Courses of Action:**  
+Policymakers in states where housing costs have spiked should focus on lowering the upfront barrier to buying, increasing supply of homes at reasonable prices, and removing unnecessary delays. Targeted down payment assistance and small grants make it easier for first time buyers to qualify without raising prices too much. Speeding up permit reviews for projects that meet price or size requirements and trimming fees for affordable homes can cut soft costs. Publishing a simple monthly snapshot with sale price, mortgage rate, estimated payment, median income, and percent of income spent can guide action. If payment share rises quickly or stays high, states can release more assistance funds, prioritize reviews, or offer outreach sessions. Reviewing stalled lots, overlapping reviews, and unclear rules can help small projects move forward. Dashboards with clear labels build trust.
+
+For buyers, it is important to look up local home prices, check mortgage rates, and use a calculator to see what monthly payments might be. Adding estimates for taxes and insurance helps create a realistic budget. If payments take up too much income, buyers can expand their search, adjust down payment plans, or compare lenders. State and local programs can provide extra help. Taking time to save and test a future payment can make the budget easier to manage.
+
+Both policymakers and buyers benefit from watching trends in prices, rates, incomes, and payment shares. Direct language and practical steps help people focus on actions instead of headlines.
+
+---
+
+## H. Panopto Presentation
+
+[Capstone Presentation Link](https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=21f79dfb-404e-43c5-a5ae-b3560169247f)
+
+---
+
+## References
+
+- Redfin Data Center: https://www.redfin.com/news/data-center/
+- FRED Mortgage Rate Data: https://fred.stlouisfed.org/series/MORTGAGE30US
+- FRED State Median Income: https://fredaccount.stlouisfed.org/
+- Kaggle USA Real Estate Dataset: https://www.kaggle.com/datasets/ahmedshahriarsakib/usa-real-estate-dataset
+
+---
+
+## Appendixes
+
+**Appendix A: Data Sources and Raw Files**  
+- Metro_median_sale_price_now_uc_sfrcondo_month.csv  
+- MORTGAGE30US.csv  
+- State income CSVs
+
+**Appendix B: Python and Jupyter Notebook Code**  
+- See main.ipynb for complete data cleaning, merging, and calculations.
+
+**Appendix C: Final Analysis CSV**  
+- See final.csv for processed data.
+
+**Appendix D: Tableau Dashboard**  
+[Tableau Visualization Link](https://public.tableau.com/app/profile/michael.monroe6066/viz/DataAnalyticsCapstone_17564236974980/Linegraphofmonthlyincome)
+
+**Appendix E: Github Repository**  
+[Capstone Code Repository](https://github.com/michaelleemonroe89/capstone_code)
